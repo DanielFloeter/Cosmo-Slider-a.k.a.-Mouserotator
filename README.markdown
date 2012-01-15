@@ -13,4 +13,4 @@ This plugin is licensed under the MIT License (LICENSE.txt).
 
 Copyright retained for jQuery "Mouse Wheel Plugin" (c) 2011 [Brandon Aaron](http://brandonaaron.net)
 
-Copyright for cosmo-slider (c) 2012 [Daniel Flöter](http://kometschuh.de)
+Copyright for cosmo-slider (c) 2012 [Daniel Floeter](http://kometschuh.de)
