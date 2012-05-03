@@ -1,6 +1,6 @@
 # Image Slider/-Rotator navigated with mouse wheel
 
-Image rotator
+Image Mouse-Rotator
 
 jQuery Mouse Wheel Plugin
 
