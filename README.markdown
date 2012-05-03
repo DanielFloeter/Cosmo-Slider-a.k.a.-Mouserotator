@@ -1,6 +1,8 @@
-# jQuery Mouse Wheel Plugin
+# Image Slider rotator navigated with mouse wheel
 
-Slider rotator navigated with mouse wheel
+Image rotator
+
+jQuery Mouse Wheel Plugin
 
 demo page: [http://www.kometschuh.de/cosmo_slider/index.htm] (http://www.kometschuh.de/cosmo_slider/index.htm)
 
