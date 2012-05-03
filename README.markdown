@@ -1,4 +1,4 @@
-# Image Slider rotator navigated with mouse wheel
+# Image Slider/-Rotator navigated with mouse wheel
 
 Image rotator
 
