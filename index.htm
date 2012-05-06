@@ -21,8 +21,8 @@
         $(function () {
 
             //------------------------------------------------------ - - - - - - - - - -------//
-            // global variables
-            var global = {
+            // settings
+            var settings = {
                 strImagePath: 'images',
                 aImages: ['10.jpg', 'Entwurf-1_02.jpg', '6.jpg', '7.jpg'],
                 nRadiusWidth: '300',
@@ -32,14 +32,14 @@
 
             //------------------------------------------------------ - - - - - - - - - -------//
             // creat HTML-Document for rotator (Document Object Model)
-            jQuery.each(global.aImages, function (key, value) {
+            jQuery.each(settings.aImages, function (key, value) {
 
-                var nOffset = 6 / $(global.aImages).toArray().length * key;
+                var nOffset = 6 / $(settings.aImages).toArray().length * key;
                 $('<img/>', {
                     id: 'image' + value.substring(0, value.length - 4),
-                    src: global.strImagePath + '/' + value,
-                    style: 'left: ' + Math.cos(nOffset) * global.nRadiusWidth + 'px;'
-                        + ' top: ' + Math.sin(nOffset) * +parseInt((global.bAheadIsDown == true ? '+' : '-') + 20) + 'px;'
+                    src: settings.strImagePath + '/' + value,
+                    style: 'left: ' + Math.cos(nOffset) * settings.nRadiusWidth + 'px;'
+                        + ' top: ' + Math.sin(nOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + 20) + 'px;'
                         + ' z-index: ' + Math.floor(Math.sin(nOffset) * 100) + 100 + ';'
                 }).appendTo('#cosmo_slider');
             });
@@ -51,12 +51,12 @@
 
                 var nAlphaWithOffset;
                 nAlpha += (delta / 20);
-                var nImageCount = $(global.aImages).toArray().length;
+                var nImageCount = $(settings.aImages).toArray().length;
                 for (var i = 0; i < nImageCount; i++) {
                     nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
-                    var strImageName = global.aImages[i].substring(0, global.aImages[i].length - 4);
+                    var strImageName = settings.aImages[i].substring(0, settings.aImages[i].length - 4);
                     $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * 300 + 'px');
-                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * +parseInt((global.bAheadIsDown == true ? '+' : '-') + 20) + 'px');
+                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + 20) + 'px');
                     $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);
                 }
 
