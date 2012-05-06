@@ -1,77 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta name="author" content="Daniel Flöter" />
-        <meta name="date" content="2012-05-06T22:12:00+01:00" />
-        <meta name="ROBOTS" content="ALL" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
-        <title>COSMO-SLIDER - demo-page</title>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-        <script type="text/javascript" src="jquery-mousewheel-3.0.6/jquery.mousewheel.js"></script>
-    </head>
+<head>
+    <meta name="author" content="Daniel Flöter" />
+    <meta name="date" content="2012-05-06T22:12:00+01:00" />
+    <meta name="ROBOTS" content="ALL" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>COSMO-SLIDER - demo-page</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-mousewheel-3.0.6/jquery.mousewheel.js"></script>
     <style type="text/css">
-        img
-        {
-            position: absolute;
-        }
-        #cosmo_slider
-        {
-            left: 500px;
-            top: 200px;
-            position: relative;
-        }
+        img { position: absolute; }
+        #cosmo_slider { left: 500px; top: 200px; position: relative; }
     </style>
 </head>
 <body>
     <div id="cosmo_slider">
-    </div>  
+    </div>
     <script type="text/javascript">
-    
+
         $(function () {
-    
+
             //------------------------------------------------------ - - - - - - - - - -------//
             // global variables
             var global = {
                 strImagePath: 'images',
-                aImages: ['10.jpg','Entwurf-1_02.jpg','6.jpg','7.jpg'],
+                aImages: ['10.jpg', 'Entwurf-1_02.jpg', '6.jpg', '7.jpg'],
                 nRadiusWidth: '300',
                 nRadiusHeight: '20',
                 bAheadIsDown: false
             };
-                        
+
             //------------------------------------------------------ - - - - - - - - - -------//
             // creat HTML-Document for rotator (Document Object Model)
-            jQuery.each(global.aImages, function(key, value){
-                
+            jQuery.each(global.aImages, function (key, value) {
+
                 var nOffset = 6 / $(global.aImages).toArray().length * key;
-                $('<img/>', {                                       
-                    id: 'image'+value.substring(0,value.length-4),
+                $('<img/>', {
+                    id: 'image' + value.substring(0, value.length - 4),
                     src: global.strImagePath + '/' + value,
-                    style: 'left: ' + Math.cos(nOffset) * global.nRadiusWidth + 'px;' 
-                        + ' top: ' + Math.sin(nOffset) * + parseInt( (global.bAheadIsDown==true?'+':'-') + 20) + 'px;' 
+                    style: 'left: ' + Math.cos(nOffset) * global.nRadiusWidth + 'px;'
+                        + ' top: ' + Math.sin(nOffset) * +parseInt((global.bAheadIsDown == true ? '+' : '-') + 20) + 'px;'
                         + ' z-index: ' + Math.floor(Math.sin(nOffset) * 100) + 100 + ';'
-                }).appendTo('#cosmo_slider');                
-            });  
-            
+                }).appendTo('#cosmo_slider');
+            });
+
             //------------------------------------------------------ - - - - - - - - - -------//
             // rotate translation with mousewheel event
-            var nAlpha = 0;            
+            var nAlpha = 0;
             $('html').mousewheel(function (event, delta, deltaX, deltaY) {
-                                               
+
                 var nAlphaWithOffset;
                 nAlpha += (delta / 20);
                 var nImageCount = $(global.aImages).toArray().length;
                 for (var i = 0; i < nImageCount; i++) {
-                    nAlphaWithOffset = nAlpha + (6 / nImageCount * i);                                                         
-                    var strImageName = global.aImages[i].substring(0,global.aImages[i].length - 4);                    
-                    $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * 300 + 'px');               
-                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * + parseInt( (global.bAheadIsDown==true?'+':'-') + 20) + 'px');   
-                    $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);                    
+                    nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
+                    var strImageName = global.aImages[i].substring(0, global.aImages[i].length - 4);
+                    $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * 300 + 'px');
+                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * +parseInt((global.bAheadIsDown == true ? '+' : '-') + 20) + 'px');
+                    $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);
                 }
-                
+
             });
         });
 
-    </script>        
+    </script>
 </body>
 </html>
