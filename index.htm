@@ -1,64 +1,77 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>COSMO-SLIDER - demo-page</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery-mousewheel-3.0.6/jquery.mousewheel.js"></script>
-</head>
-<style type="text/css">
-    img
-    {
-        position: absolute;
-    }
-    #cosmo_slider
-    {
-        left: 500px;
-        top: 200px;
-        position: relative;
-    }
-</style>
-<script type="text/javascript">
-    $(function () {
-        var alpha10 = 0;
-        var alpha1_02 = 1.5;
-        var alpha6 = 3;
-        var alpha7 = 4.5;
-        $('html').mousewheel(function (event, delta, deltaX, deltaY) {
-            alpha10 = alpha10 += (delta / 5);
-            console.log(alpha10);
-            $('#image10').css('left', Math.cos(alpha10) * 300 + 'px');
-            $('#image10').css('top', Math.sin(alpha10) < 0 ? Math.abs(Math.sin(alpha10) * 20) + 'px' : '-' + Math.abs(Math.sin(alpha10) * 20) + 'px');
-            $('#image10').css('z-index', Math.floor((Math.sin(alpha10) * 100) + 100));
-
-            alpha1_02 = alpha1_02 += (delta / 5);
-            $('#image1_02').css('left', Math.cos(alpha1_02) * 300 + 'px');
-            $('#image1_02').css('top', Math.sin(alpha1_02) < 0 ? Math.abs(Math.sin(alpha1_02) * 20) + 'px' : '-' + Math.abs(Math.sin(alpha1_02) * 20) + 'px');
-            $('#image1_02').css('z-index', Math.floor((Math.sin(alpha1_02) * 100) + 100));
-
-            alpha6 = alpha6 += (delta / 5);
-            $('#image6').css('left', Math.cos(alpha6) * 300 + 'px');
-            $('#image6').css('top', Math.sin(alpha6) < 0 ? Math.abs(Math.sin(alpha6) * 20) + 'px' : '-' + Math.abs(Math.sin(alpha6) * 20) + 'px');
-            $('#image6').css('z-index', Math.floor((Math.sin(alpha6) * 100) + 100));
-
-            alpha7 = alpha7 += (delta / 5);
-            $('#image7').css('left', Math.cos(alpha7) * 300 + 'px');
-            $('#image7').css('top', Math.sin(alpha7) < 0 ? Math.abs(Math.sin(alpha7) * 20) + 'px' : '-' + Math.abs(Math.sin(alpha7) * 20) + 'px');
-            $('#image7').css('z-index', Math.floor((Math.sin(alpha7) * 100) + 100));
-        });
-    });
-
-</script>
+    <head>
+        <meta name="author" content="Daniel Flöter" />
+        <meta name="date" content="2012-05-06T22:12:00+01:00" />
+        <meta name="ROBOTS" content="ALL" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
+        <title>COSMO-SLIDER - demo-page</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script type="text/javascript" src="jquery-mousewheel-3.0.6/jquery.mousewheel.js"></script>
+    </head>
+    <style type="text/css">
+        img
+        {
+            position: absolute;
+        }
+        #cosmo_slider
+        {
+            left: 500px;
+            top: 200px;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
     <div id="cosmo_slider">
-        <img id="image10" src="images/10.jpg" alt="sample image" style="left: 300px; top: 0px;
-            z-index: 100" />
-        <img id="image1_02" src="images/Entwurf-1_02.jpg" alt="sample image" style="left: 21.2212px;
-            top: -19.9499px; z-index: 199" />
-        <img id="image6" src="images/6.jpg" alt="sample image" style="left: -296.998px; top: -2.8224px;
-            z-index: 114" />
-        <img id="image7" src="images/7.jpg" alt="sample image" style="left: -63.2387px; top: 19.5506px;
-            z-index: 2" />
-    </div>
+    </div>  
+    <script type="text/javascript">
+    
+        $(function () {
+    
+            //------------------------------------------------------ - - - - - - - - - -------//
+            // global variables
+            var global = {
+                strImagePath: 'images',
+                aImages: ['10.jpg','Entwurf-1_02.jpg','6.jpg','7.jpg'],
+                nRadiusWidth: '300',
+                nRadiusHeight: '20',
+                bAheadIsDown: false
+            };
+                        
+            //------------------------------------------------------ - - - - - - - - - -------//
+            // creat HTML-Document for rotator (Document Object Model)
+            jQuery.each(global.aImages, function(key, value){
+                
+                var nOffset = 6 / $(global.aImages).toArray().length * key;
+                $('<img/>', {                                       
+                    id: 'image'+value.substring(0,value.length-4),
+                    src: global.strImagePath + '/' + value,
+                    style: 'left: ' + Math.cos(nOffset) * global.nRadiusWidth + 'px;' 
+                        + ' top: ' + Math.sin(nOffset) * + parseInt( (global.bAheadIsDown==true?'+':'-') + 20) + 'px;' 
+                        + ' z-index: ' + Math.floor(Math.sin(nOffset) * 100) + 100 + ';'
+                }).appendTo('#cosmo_slider');                
+            });  
+            
+            //------------------------------------------------------ - - - - - - - - - -------//
+            // rotate translation with mousewheel event
+            var nAlpha = 0;            
+            $('html').mousewheel(function (event, delta, deltaX, deltaY) {
+                                               
+                var nAlphaWithOffset;
+                nAlpha += (delta / 20);
+                var nImageCount = $(global.aImages).toArray().length;
+                for (var i = 0; i < nImageCount; i++) {
+                    nAlphaWithOffset = nAlpha + (6 / nImageCount * i);                                                         
+                    var strImageName = global.aImages[i].substring(0,global.aImages[i].length - 4);                    
+                    $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * 300 + 'px');               
+                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * + parseInt( (global.bAheadIsDown==true?'+':'-') + 20) + 'px');   
+                    $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);                    
+                }
+                
+            });
+        });
+
+    </script>        
 </body>
 </html>
