@@ -27,7 +27,8 @@
                 aImages: ['10.jpg', 'Entwurf-1_02.jpg', '6.jpg', '7.jpg'],
                 nRadiusWidth: '300',
                 nRadiusHeight: '20',
-                bAheadIsDown: false
+                bAheadIsDown: false,
+                nRotateSpeed: 410
             };
 
             //------------------------------------------------------ - - - - - - - - - -------//
@@ -51,7 +52,7 @@
             $('html').mousewheel(function (event, delta, deltaX, deltaY) {
 
                 var nAlphaWithOffset;
-                nAlpha += (delta / 20);
+                nAlpha += (delta * settings.nRotateSpeed / 4100);
                 var nImageCount = $(settings.aImages).toArray().length;
                 for (var i = 0; i < nImageCount; i++) {
                     nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
