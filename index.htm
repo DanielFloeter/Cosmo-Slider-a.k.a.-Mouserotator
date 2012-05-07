@@ -42,6 +42,7 @@
                         + ' top: ' + Math.sin(nOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px;'
                         + ' z-index: ' + Math.floor(Math.sin(nOffset) * 100) + 100 + ';'
                 }).appendTo('#cosmo_slider');
+
             });
 
             //------------------------------------------------------ - - - - - - - - - -------//
@@ -56,11 +57,12 @@
                     nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
                     var strImageName = settings.aImages[i].substring(0, settings.aImages[i].length - 4);
                     $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * settings.nRadiusWidth + 'px');
-                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * + parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px');
+                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px');
                     $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);
                 }
 
             });
+
         });
 
     </script>
