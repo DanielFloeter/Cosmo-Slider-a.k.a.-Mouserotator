@@ -32,6 +32,12 @@
             };
 
             //------------------------------------------------------ - - - - - - - - - -------//
+            // global variables
+            var global = {
+                nAlpha: 0
+            };
+
+            //------------------------------------------------------ - - - - - - - - - -------//
             // creat HTML-Document for rotator (Document Object Model)
             jQuery.each(settings.aImages, function (key, value) {
 
@@ -48,14 +54,13 @@
 
             //------------------------------------------------------ - - - - - - - - - -------//
             // rotate translation with mousewheel event
-            var nAlpha = 0;
             $('html').mousewheel(function (event, delta, deltaX, deltaY) {
 
                 var nAlphaWithOffset;
-                nAlpha += (delta * settings.nRotateSpeed / 4100);
+                global.nAlpha += (delta * settings.nRotateSpeed / 4100);
                 var nImageCount = $(settings.aImages).toArray().length;
                 for (var i = 0; i < nImageCount; i++) {
-                    nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
+                    nAlphaWithOffset = global.nAlpha + (6 / nImageCount * i);
                     var strImageName = settings.aImages[i].substring(0, settings.aImages[i].length - 4);
                     $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * settings.nRadiusWidth + 'px');
                     $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px');
