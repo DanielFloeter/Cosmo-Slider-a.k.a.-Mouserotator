@@ -39,7 +39,7 @@
                     id: 'image' + value.substring(0, value.length - 4),
                     src: settings.strImagePath + '/' + value,
                     style: 'left: ' + Math.cos(nOffset) * settings.nRadiusWidth + 'px;'
-                        + ' top: ' + Math.sin(nOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + 20) + 'px;'
+                        + ' top: ' + Math.sin(nOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px;'
                         + ' z-index: ' + Math.floor(Math.sin(nOffset) * 100) + 100 + ';'
                 }).appendTo('#cosmo_slider');
             });
@@ -55,8 +55,8 @@
                 for (var i = 0; i < nImageCount; i++) {
                     nAlphaWithOffset = nAlpha + (6 / nImageCount * i);
                     var strImageName = settings.aImages[i].substring(0, settings.aImages[i].length - 4);
-                    $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * 300 + 'px');
-                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * +parseInt((settings.bAheadIsDown == true ? '+' : '-') + 20) + 'px');
+                    $('#image' + strImageName).css('left', Math.cos(nAlphaWithOffset) * settings.nRadiusWidth + 'px');
+                    $('#image' + strImageName).css('top', Math.sin(nAlphaWithOffset) * + parseInt((settings.bAheadIsDown == true ? '+' : '-') + settings.nRadiusHeight) + 'px');
                     $('#image' + strImageName).css('z-index', Math.floor(Math.sin(nAlphaWithOffset) * 100) + 100);
                 }
 
